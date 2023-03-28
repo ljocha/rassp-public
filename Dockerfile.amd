@@ -1,0 +1,31 @@
+FROM rocm/pytorch
+
+RUN pip3 install matchms
+RUN pip3 install jupyterlab
+
+RUN pip3 install rdkit pandas matplotlib cython numba scikit-learn
+
+RUN pip3 install python-igraph ruffus tqdm boto3 networkx graphviz tensorflow tensorboardX diskcache PyYAML natsort pyarrow seaborn SQLAlchemy click
+
+RUN pip3 install git+https://github.com/thejonaslab/tinygraph.git
+
+RUN mkdir -p /build/rassp
+ENV RASSP /build/rassp
+
+COPY setup.py /build/
+#COPY --chown=build models/* $RASSP/models/
+COPY rassp/util.py rassp/inference_script.py rassp/run_rassp.py rassp/netutil.py $RASSP/
+# COPY --chown=build util.py netutil.py $RASSP/
+COPY rassp/model/ $RASSP/model/
+COPY rassp/featurize/ $RASSP/featurize/
+COPY rassp/dataset/ $RASSP/dataset/
+COPY rassp/msutil/ $RASSP/msutil/
+
+RUN pip install ipywidgets
+RUN jupyter nbextension enable --py widgetsnbextension
+
+WORKDIR /build/
+RUN python -m pip install -e .
+RUN python -c 'import rassp.msutil'
+
+WORKDIR /work
