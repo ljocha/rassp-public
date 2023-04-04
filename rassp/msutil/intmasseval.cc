@@ -28,18 +28,26 @@ offset_poly_t get_element_poly(atomicno_t atomicno) {
         return offset_poly_t(12, {0.9893f, 0.0107f}); 
     case 1:
         return offset_poly_t(1, {0.999885f, 0.000115f}); 
+    case 5:
+        return offset_poly_t(10, {0.199f, 0.801f });
     case 7:
         return offset_poly_t(14, {0.9963f, 0.00368f}); 
     case 8:
         return offset_poly_t(16, {0.99975f, 0.00038f,0.00205f});
     case 9:
         return offset_poly_t(19, {1.00f});
+    case 14:
+        return offset_poly_t(28, {0.922f, 0.0468f, 0.0309f });
     case 15:
         return offset_poly_t(31, {1.0f}); 
     case 16:
         return offset_poly_t(32, {0.9493f, 0.0076f, 0.0429f, 0.0f, 0.0002f});
     case 17:
         return offset_poly_t(35, {0.7578f, 0, 0.2422f}); 
+    case 35:
+        return offset_poly_t(79, {0.5069f, 0, 0.4931f});
+    case 53:
+        return offset_poly_t(127, {1.0f});
         
     default:
         throw std::runtime_error("unknown atomicno"); 

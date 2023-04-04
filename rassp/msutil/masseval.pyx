@@ -190,7 +190,7 @@ cpdef second(x):
 
 
 
-cpdef py_get_all_frag_spect_np(atomicno_num, MAX_ATOMICNO=20, MAX_PEAK_NUM=6):
+cpdef py_get_all_frag_spect_np(atomicno_num, MAX_ATOMICNO=64, MAX_PEAK_NUM=6):
      f = Formula(atomicno_num)
      t1 = time.time()
      cdef vector[spectrum_t] out = get_all_frag_spect(f.formula)
@@ -225,7 +225,7 @@ cpdef py_get_all_frag_spect_np(atomicno_num, MAX_ATOMICNO=20, MAX_PEAK_NUM=6):
      return npout
  
 
-cpdef py_get_all_frag_spect_np_nostruct(atomicno_num, MAX_ATOMICNO=20, MAX_PEAK_NUM=6):
+cpdef py_get_all_frag_spect_np_nostruct(atomicno_num, MAX_ATOMICNO=64, MAX_PEAK_NUM=6):
      # faster, non-struct version? 
      f = Formula(atomicno_num)
      #t1 = time.time()
@@ -322,7 +322,7 @@ cpdef py_generate_sub_formulae(atomicno_num_dict):
     return out
 
 
-cpdef py_get_all_frag_spect_highres(atomicno_num, MAX_ATOMICNO=20, MAX_PEAK_NUM=6):
+cpdef py_get_all_frag_spect_highres(atomicno_num, MAX_ATOMICNO=64, MAX_PEAK_NUM=6):
 
      f = Formula(atomicno_num)
 

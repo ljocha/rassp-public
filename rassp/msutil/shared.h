@@ -9,8 +9,13 @@
 
 typedef char atomicno_t;
 
+/* ljocha
 const size_t NUM_FORMULA_ELEMENTS = 8; 
 const int FORMULA_ORDER[NUM_FORMULA_ELEMENTS] = {1, 6, 7, 8, 9, 15, 16, 17};
+*/
+const int FORMULA_ORDER[] = {1, 5, 6, 7, 8, 9, 14, 15, 16, 17, 35, 53};
+const size_t NUM_FORMULA_ELEMENTS = sizeof FORMULA_ORDER / sizeof FORMULA_ORDER[0];
+
 
 class formula_t {
 public:

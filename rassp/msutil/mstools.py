@@ -88,15 +88,16 @@ def create_cpp_lut(filename):
 
     # generate the table
 
-    ATOMICNOS = [1, 6, 7, 8, 9, 15, 16, 17]
-    FORMULA_SIZES = {1: 60,
-                     6: 60,
-                     7: 60,
-                     8: 60,
-                     9: 60,
-                     15: 60,
-                     16: 60,
-                     17: 60}
+    ATOMICNOS = [1, 5, 6, 7, 8, 9, 14, 15, 16, 17, 35, 53 ]
+#    FORMULA_SIZES = {1: 60,
+#                     6: 60,
+#                     7: 60,
+#                     8: 60,
+#                     9: 60,
+#                     15: 60,
+#                     16: 60,
+#                     17: 60}
+    FORMULA_SIZES = dict(zip(ATOMICNOS,[60]*len(ATOMICNOS)))
                      
     formula_element_peaks = {}
     for an in ATOMICNOS:
