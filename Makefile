@@ -1,7 +1,7 @@
 image=ljocha/rassp
 port=8070
 
-flags=-v ${PWD}:/work -w /work --rm -ti -e HOME=/work
+flags=-v ${PWD}:/work -w /work --rm -ti -e HOME=/work --ulimit nofile=32768:32768
 user=-u ${shell id -u} 
 version=${shell cat VERSION}
 amdflags=--device=/dev/kfd --device=/dev/dri --shm-size 16G --group-add video --group-add render
