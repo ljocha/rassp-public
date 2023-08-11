@@ -1,5 +1,10 @@
 # latest with cuda 11.8; required at A100, 12.0 is broken there
-FROM nvcr.io/nvidia/pytorch:22.12-py3
+# FROM nvcr.io/nvidia/pytorch:22.12-py3
+
+# broken with pytorch 2??
+# FROM nvcr.io/nvidia/pytorch:23.03-py3
+
+FROM pytorch/pytorch:1.13.1-cuda11.6-cudnn8-devel
 
 RUN pip3 install matchms
 RUN pip3 install jupyterlab
@@ -8,6 +13,8 @@ RUN pip3 install rdkit pandas matplotlib cython numba scikit-learn
 
 RUN pip3 install python-igraph ruffus tqdm boto3 networkx graphviz tensorflow tensorboardX diskcache PyYAML natsort pyarrow seaborn SQLAlchemy click
 
+RUN apt update -y && apt install -y git
+# RUN apt install -y git
 RUN pip3 install git+https://github.com/thejonaslab/tinygraph.git
 
 RUN mkdir -p /build/rassp
@@ -26,14 +33,14 @@ RUN python -m pip install -e .
 RUN python -c 'import rassp.msutil'
 
 RUN pip3 install jupyterhub
-RUN pip3 install ipywidgets
-RUN jupyter nbextension enable --py widgetsnbextension
+#RUN pip3 install ipywidgets
+#RUN jupyter nbextension enable --py widgetsnbextension
 
-RUN useradd -m -u 1000 jovyan
-USER jovyan
-WORKDIR /home/jovyan
-
-COPY start-notebook.sh /usr/local/bin/
-ENTRYPOINT ["/bin/bash"]
-CMD ["start-notebook.sh"]
-
+# RUN useradd -m -u 1000 jovyan
+# USER jovyan
+# WORKDIR /home/jovyan
+# 
+# COPY start-notebook.sh /usr/local/bin/
+# ENTRYPOINT ["/bin/bash"]
+# CMD ["start-notebook.sh"]
+# 
