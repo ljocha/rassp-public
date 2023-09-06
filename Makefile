@@ -5,7 +5,8 @@ flags=-v ${PWD}:/work -w /work --rm -ti -e HOME=/work --ulimit nofile=32768:3276
 user=-u ${shell id -u} 
 version=${shell cat VERSION}
 amdflags=--device=/dev/kfd --device=/dev/dri --shm-size 16G --group-add video --group-add render
-nvidiaflags=--gpus=all --entrypoint=/usr/bin/python
+nvidiaflags=--gpus=all 
+# --entrypoint=/usr/bin/python
 
 build-amd:
 	docker build -f Dockerfile.amd -t ${image}:amd .
@@ -27,6 +28,6 @@ root-amd:
 	docker run -ti ${flags} ${amdflags} ${image}:amd bash
 
 run-nvidia:
-	docker run -ti ${flags} ${user} ${nvidiaflags} ${image}:nvidia-${version} /usr/local/bin/jupyter lab --ip 0.0.0.0 --port ${port}
+	docker run -ti ${flags} ${user} ${nvidiaflags} -p ${port}:${port} ${image}:nvidia-${version} jupyter lab --ip 0.0.0.0 --port ${port}
 
 

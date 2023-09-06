@@ -79,9 +79,9 @@ cpdef py_poly_mul(float[:] a, float[:] b):
      #     b_v.push_back(v)
 
          
-     cpdef offset_poly_t p1 = vect_to_offset_poly(0, a)
-     cpdef offset_poly_t p2 = vect_to_offset_poly(0, b)
-     cpdef offset_poly_t out = poly_mul(p1, p2)
+     cdef offset_poly_t p1 = vect_to_offset_poly(0, a)
+     cdef offset_poly_t p2 = vect_to_offset_poly(0, b)
+     cdef offset_poly_t out = poly_mul(p1, p2)
 
      s = []
      for p in range(out.offset):
@@ -110,7 +110,7 @@ cdef class OffsetPoly:
 
      def __mul__(OffsetPoly self, OffsetPoly other):
          cdef offset_poly_t result = poly_mul(self.offsetpoly, other.offsetpoly)
-         cpdef OffsetPoly outp = OffsetPoly(0, np.array([], dtype=np.float32))
+         cdef OffsetPoly outp = OffsetPoly(0, np.array([], dtype=np.float32))
          outp.offsetpoly = result
          
          return outp
@@ -118,7 +118,7 @@ cdef class OffsetPoly:
      def coalesce(OffsetPoly self, float thold):
 
          cdef offset_poly_t  out = poly_coalesce(self.offsetpoly, thold)
-         cpdef OffsetPoly outp = OffsetPoly(0, np.array([], dtype=np.float32))
+         cdef OffsetPoly outp = OffsetPoly(0, np.array([], dtype=np.float32))
          outp.offsetpoly = out
          
          return outp
