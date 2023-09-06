@@ -14,6 +14,9 @@ build-nvidia:
 	docker build -f Dockerfile.nvidia -t ${image}:nvidia-${version} .
 	docker push ${image}:nvidia-${version}
 
+run:
+	docker run -ti ${flags} ${user} -p ${port}:${port} ${image}:amd jupyter lab --ip 0.0.0.0 --port ${port}
+
 run-amd:
 	docker run -ti ${flags} ${user} ${amdflags} -p ${port}:${port} ${image}:amd jupyter lab --ip 0.0.0.0 --port ${port}
 
