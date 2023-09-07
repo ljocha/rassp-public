@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
 use_gpu=True
-batch_size=1
+batch_size=8
+workers=12
 
 import argparse
 import rassp
@@ -33,7 +34,7 @@ predictor = netutil.PredModel(
 )
 
 with open(a.smiles) as sf:
-	smiles = sf.readlines()
+	smiles = sf.read().splitlines()
 
 mols = [ Chem.AddHs(Chem.MolFromSmiles(s)) for s in smiles]
 assert len(mols) == len(smiles)
@@ -46,7 +47,7 @@ pred = predictor.pred(
     batch_size=batch_size, # XXX
     dataloader_config={
         'pin_memory': False,
-        'num_workers': 0, # XXX
+        'num_workers': workers, # XXX
         'persistent_workers': False,
     },
     benchmark_dataloader=False,
