@@ -12,6 +12,7 @@ import sys
 
 from .util import get_nos_coords, get_nos
 from rassp.msutil import masscompute
+from rassp.util import get_formula
 
 from rdkit import RDLogger
 RDLogger.DisableLog('rdApp.*') 
@@ -631,7 +632,7 @@ class PossibleFormulaFeaturizer:
         self.clip_mass = clip_mass
         
     def num_unique_f(self, m):
-        f = util.get_formula(Chem.AddHs(Chem.Mol(m)))
+        f = get_formula(Chem.AddHs(Chem.Mol(m)))
         return np.prod([v + 1 for v in f.values()])
         
     def __call__(self, mol, formulae=None, masses = None):
