@@ -2,7 +2,7 @@
 
 image=ljocha/rassp
 version="$(cat VERSION)"
-sif=/storage/brno3-cerit/home/ljocha/singularity/rassp_${version}
+sif=/storage/brno3-cerit/home/ljocha/singularity/rassp_${version}.sif
 
 flags="-v ${PWD}:/work -w /work --rm -ti -e HOME=/work --ulimit nofile=32768:32768 --shm-size=8G"
 user="-u $(id -u)"
@@ -16,7 +16,8 @@ elif [ $(basename $0) = predict-nvidia.sh ]; then
 	docker run -ti ${flags} ${user} ${nvidiaflags} ${image}:nvidia-${version} python3 predict.py "$@"
 
 elif [ $(basename $0) = predict-singularity.sh ]; then
-	singularity exec --nv -B ${SCRATCHDIR}:/work --pwd /work python3 predict.py "$@"
+	CUDA_VISIBLE_DEVICES=$(nvidia-smi -L | grep $CUDA_VISIBLE_DEVICES | sed 's/^GPU \([0-9]*\):/\1/')
+	singularity exec --nv -B ${SCRATCHDIR}:/work --pwd /work $sif /opt/nvidia/nvidia_entrypoint.sh python3 predict.py "$@"
 
 else
 	echo $0: WTF? >&2
