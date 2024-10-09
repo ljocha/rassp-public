@@ -34,3 +34,6 @@ bash-nvidia:
 	docker run -ti ${flags} ${user} ${nvidiaflags} ${image}:nvidia-${version} bash
 
 
+run-train-nvidia:
+	docker run -ti ${flags} ${user} ${nvidiaflags} ${image}:nvidia-${version} python run_rassp_train.py
+
