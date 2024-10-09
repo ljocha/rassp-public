@@ -32,6 +32,12 @@ exp_config['DATALOADER_NUM_WORKERS'] = 12
 exp_config['exp_data']['data'][0]['db_filename'] = 'train-rassp-small.pq'
 exp_config['exp_data']['data'][1]['db_filename'] = 'valid-rassp-small.pq'
 
+#abiff
+
+os.environ["OMP_NUM_THREADS"] = "6"
+exp_config['batch_size'] = 8
+
+
 with open('exp.yml','w') as y:
     yaml.dump(exp_config,y)
 
