@@ -4,7 +4,10 @@
 # broken with pytorch 2??
 # FROM nvcr.io/nvidia/pytorch:23.03-py3
 
-FROM pytorch/pytorch:1.13.1-cuda11.6-cudnn8-devel
+# python 3.10, broken
+# FROM pytorch/pytorch:1.13.1-cuda11.6-cudnn8-devel
+
+FROM pytorch/pytorch:1.12.1-cuda11.3-cudnn8-devel
 
 RUN pip3 install matchms
 RUN pip3 install jupyterlab
